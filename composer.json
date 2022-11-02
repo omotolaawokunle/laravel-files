@@ -1,0 +1,54 @@
+{
+    "name": "omotolaawokunle/laravel-files",
+    "description": "Laravel package to extend laravel functionality on the filesystem",
+    "keywords": [
+        "omotolaawokunle",
+        "laravel-files"
+    ],
+    "homepage": "https://github.com/omotolaawokunle/laravel-files",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Omotola Awokunle",
+            "email": "omotolaawokunle@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "illuminate/support": "^8.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Omotolaawokunle\\LaravelFiles\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Omotolaawokunle\\LaravelFiles\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Omotolaawokunle\\LaravelFiles\\LaravelFilesServiceProvider"
+            ],
+            "aliases": {
+                "LaravelFiles": "Omotolaawokunle\\LaravelFiles\\LaravelFilesFacade"
+            }
+        }
+    }
+}
