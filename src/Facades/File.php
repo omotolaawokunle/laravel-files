@@ -1,13 +1,13 @@
 <?php
 
-namespace Omotolaawokunle\LaravelFiles;
+namespace Omotolaawokunle\LaravelFiles\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Omotolaawokunle\LaravelFiles\Skeleton\SkeletonClass
+ * @see \Omotolaawokunle\LaravelFiles\File
  */
-class LaravelFilesFacade extends Facade
+class File extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -16,6 +16,6 @@ class LaravelFilesFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'laravel-files';
+        return 'file';
     }
 }

@@ -44,10 +44,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Omotolaawokunle\\LaravelFiles\\LaravelFilesServiceProvider"
+                "Omotolaawokunle\\LaravelFiles\\Providers\\LaravelFilesServiceProvider"
             ],
             "aliases": {
-                "LaravelFiles": "Omotolaawokunle\\LaravelFiles\\LaravelFilesFacade"
+                "File": "Omotolaawokunle\\LaravelFiles\\Facades\\File"
             }
         }
     }
