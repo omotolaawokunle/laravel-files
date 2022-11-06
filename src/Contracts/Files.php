@@ -45,9 +45,11 @@ interface Files
      */
     public function exists(): bool;
 
-    public function clone($path = "/", string $name): Files;
+    public function clone($path = "/", string $name = ""): Files;
 
     public function move($path = "/"): Files;
 
     public function rename(string $name): Files;
+
+    public function getPath(): string;
 }
