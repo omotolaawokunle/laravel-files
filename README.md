@@ -35,10 +35,10 @@ Install docsify
 npm i docsify-cli -g
 ```
 
-Initialize docsify
+Preview the docs
 
 ```bash
-docsify init ./docs
+docsify serve docs
 ```
 
 ### Changelog
