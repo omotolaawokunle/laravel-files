@@ -1,4 +1,4 @@
-# Very short description of the package
+# Laravel Files
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/omotolaawokunle/laravel-files.svg?style=flat-square)](https://packagist.org/packages/omotolaawokunle/laravel-files)
 [![Total Downloads](https://img.shields.io/packagist/dt/omotolaawokunle/laravel-files.svg?style=flat-square)](https://packagist.org/packages/omotolaawokunle/laravel-files)
@@ -24,6 +24,21 @@ composer require omotolaawokunle/laravel-files
 
 ```bash
 composer test
+```
+
+### Documentation
+To initialize and preview the website locally.
+
+Install docsify
+
+```bash
+npm i docsify-cli -g
+```
+
+Initialize docsify
+
+```bash
+docsify init ./docs
 ```
 
 ### Changelog
