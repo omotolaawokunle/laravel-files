@@ -7,17 +7,14 @@ use Illuminate\Support\Collection;
 use Omotolaawokunle\LaravelFiles\Contracts\Files;
 use Omotolaawokunle\LaravelFiles\Facades\File;
 
-/**
- * @todo Add code to the empty functions
- */
 class Directory implements Files
 {
     private $directory;
     private string $path = "";
 
-    public function __construct($path = "/", $name)
+    public function __construct($path = null, $name = null)
     {
-        $this->make($path, $name);
+        if (!is_null($path) && !is_null($name)) $this->make($path, $name);
     }
 
     public function make(string $path = "/", string $name, bool $strict = false): Files
@@ -62,7 +59,7 @@ class Directory implements Files
         $this->contents()->each(function (Files $content) {
             $content->delete();
         });
-        $this->closeDirectory();
+        if ($this->directory) $this->closeDirectory();
         rmdir($this->path);
         
         return true;
@@ -112,8 +109,9 @@ class Directory implements Files
 
     public function closeDirectory()
     {
-        closedir($this->directory);
-        return;
+        if ($this->directory) closedir($this->directory);
+        $this->directory = false;
+        return $this;
     }
 
     /**

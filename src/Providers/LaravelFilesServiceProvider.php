@@ -4,6 +4,7 @@ namespace Omotolaawokunle\LaravelFiles\Providers;
 
 use Omotolaawokunle\LaravelFiles\File;
 use Illuminate\Support\ServiceProvider;
+use Omotolaawokunle\LaravelFiles\Directory;
 
 class LaravelFilesServiceProvider extends ServiceProvider
 {
@@ -51,11 +52,15 @@ class LaravelFilesServiceProvider extends ServiceProvider
     public function register()
     {
         // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'laravel-files');
+        //$this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'laravel-files');
 
         // Register the main class to use with the facade
         $this->app->singleton('file', function () {
             return new File;
+        });
+
+        $this->app->singleton('directory', function () {
+            return new Directory;
         });
     }
 }

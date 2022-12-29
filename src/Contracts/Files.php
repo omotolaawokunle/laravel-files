@@ -29,7 +29,7 @@ interface Files
      *
      * @return string
      */
-    public function size($unit = 'B'): string;
+    public function size($unit = 'B', $format = false): string;
 
     /**
      * Delete file or directory
@@ -52,4 +52,11 @@ interface Files
     public function rename(string $name): Files;
 
     public function getPath(): string;
+
+    /**
+     * Get contents of file/directory
+     *
+     * @return string|\Illuminate\Support\Collection
+     */
+    public function contents();
 }
