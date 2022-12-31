@@ -10,7 +10,7 @@ use Omotolaawokunle\LaravelFiles\Facades\Directory;
 
 class DirectoryTest extends TestCase
 {
-    private Files $dir;
+    private \Omotolaawokunle\LaravelFiles\Directory $dir;
     private vfsStreamDirectory $root;
     private string $rootUrl;
 
@@ -27,6 +27,17 @@ class DirectoryTest extends TestCase
         $dir = Directory::make($this->rootUrl, "test-folder");
         $this->assertEquals(vfsStream::url("folders/test-folder"), $dir->getPath());
         $this->assertTrue($this->root->hasChild("test-folder"));
+    }
+
+    /**
+     * @expectedException \Exception
+     * @expectedExceptionMessage Directory not found!
+     */
+    public function testStrictInitialization()
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage("Directory not found!");
+        Directory::make($this->rootUrl, "test-strict", true);
     }
 
     public function testCreateDirectory()

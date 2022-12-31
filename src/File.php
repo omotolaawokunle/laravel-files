@@ -13,6 +13,11 @@ class File implements Files
     private $file;
     private string $path;
 
+    public function __construct($path = null, $name = null, $content = null)
+    {
+        if (!is_null($path) && !is_null($name)) $this->make($path, $name);
+    }
+
     public function make(string $path = "/", string $name, $content = null, $strict = false): Files
     {
         $this->path = $path . "/$name";
@@ -48,14 +53,14 @@ class File implements Files
         return false;
     }
 
-    public function clone($path = "/", string $name = "", $replace = false): Files
+    public function clone($path = null, string $name = "", $replace = false): Files
     {
         $name = $name == "" ? $this->nameWithoutExtension() . " (Copy)" : $name;
         $name .= ".{$this->extension()}";
-        $newPath = $this->getNewPath($path, $name);
+        $newPath = $path == null ? $this->getNewPath($this->path, $name) : $path . "/$name";
         if (file_exists($newPath) && !$replace) throw new Exception("$name already exists!");
         if (copy($this->path, $newPath)) {
-            return static::make($this->path, $name);
+            return $path ? static::make($path, $name) : static::make($newPath, "");
         }
         throw new Exception('File could not be copied');
     }
@@ -67,7 +72,7 @@ class File implements Files
 
     public function nameWithoutExtension()
     {
-        return basename($this->path, $this->extension());
+        return basename($this->path, "." . $this->extension());
     }
 
     private function getNewPath($path, $name)
@@ -101,15 +106,15 @@ class File implements Files
         return $this->path;
     }
 
-    public function getFile($read = true, $write = false)
+    public function getFile($read = true, $write = false, $overwrite = false)
     {
-        $this->openFile($read, $write);
+        $this->openFile($read, $write, $overwrite);
         return $this->file;
     }
 
-    public function openFile($read = true, $write = false)
+    public function openFile($read = true, $write = false, $overwrite = false)
     {
-        $this->file = fopen($this->path, $this->getMode($read, $write));
+        $this->file = fopen($this->path, $this->getMode($read, $write, $overwrite));
         return $this;
     }
 
@@ -124,17 +129,17 @@ class File implements Files
         return file_get_contents($this->path);
     }
 
-    public function writeToFile($content)
+    public function writeToFile($content, $overwrite = false)
     {
-        fwrite($this->getFile(), $content);
+        fwrite($this->getFile(true, true, $overwrite), $content);
         $this->closeFile();
         return $this;
     }
 
-    private function getMode(bool $read, bool $write)
+    private function getMode(bool $read, bool $write, bool $overwrite)
     {
-        if ($read && $write) return "a+";
+        if ($read && $write) return $overwrite ? "w+" : "a+";
         if ($read) return "r";
-        if ($write) return "a";
+        if ($write) return $overwrite ? "w" : "a";
     }
 }
